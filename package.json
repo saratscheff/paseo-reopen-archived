@@ -1,0 +1,38 @@
+{
+  "name": "reopen-archived",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Paseo plugin: list archived workspaces in the command center and reopen them with their agent.",
+  "license": "MIT",
+  "author": "Pedro Saratscheff",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saratscheff/paseo-reopen-archived.git"
+  },
+  "files": [
+    "paseo-plugin.json",
+    "index.client.ts",
+    "index.client.tsx",
+    "index.server.ts",
+    "index.server.tsx",
+    "client/",
+    "server/",
+    "shared/",
+    "OVERVIEW.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@getpaseo/plugin": "0.10.3",
+    "@tanstack/react-query": "^5.90.11",
+    "@types/node": "^22.20.5",
+    "@types/react": "~19.2.0",
+    "react": "19.1.0",
+    "react-native": "0.81.5",
+    "typescript": "^5.9.3",
+    "zod": "^4.4.3"
+  }
+}

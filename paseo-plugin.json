@@ -1,0 +1,7 @@
+{
+  "id": "reopen-archived",
+  "description": "List archived workspaces in the command center (⌘K) and reopen them with their agent, without sending it a message.",
+  "requirements": {
+    "paseo": ">=0.10.3"
+  }
+}
