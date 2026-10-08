@@ -6,6 +6,11 @@ import { listArchivedRpc, type ArchivedWorkspace } from "./shared/rpc";
 const REFRESH_INTERVAL_MS = 5_000;
 const SURFACE_ID = "reopen";
 
+/** The full path would make every workspace under a shared parent match the same query. */
+function folderName(cwd: string): string {
+  return cwd.split("/").filter(Boolean).pop() ?? cwd;
+}
+
 /** Command center ids must match /^[a-z][a-z0-9-]*$/; workspace ids look like "wks_5ffeb77658b41612". */
 function commandItemId(workspaceId: string): string {
   return `reopen-${workspaceId.toLowerCase().replace(/[^a-z0-9-]/g, "-")}`;
@@ -42,7 +47,7 @@ export default function contribute(client: PluginClientContext) {
       id: commandItemId(entry.workspaceId),
       title: `Reopen: ${entry.name}`,
       icon: "ArchiveRestore",
-      keywords: [entry.name, entry.cwd, "archived", "reopen", "restore", "unarchive", "archivado", "reabrir"],
+      keywords: [entry.name, folderName(entry.cwd), "archived", "reopen", "restore", "unarchive", "archivado", "reabrir"],
       context: "global",
       onSelect({ openSurface }) {
         pendingReopen.set(entry);

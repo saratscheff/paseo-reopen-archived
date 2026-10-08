@@ -1,5 +1,7 @@
 # paseo-reopen-archived
 
+![Archived workspaces in the command center](assets/command-center.png)
+
 A [Paseo](https://paseo.sh) plugin that lists your archived workspaces in the command center (⌘K) and reopens them, with their agent, in one step.
 
 Archiving in Paseo removes a workspace from the sidebar, but it also removes it from ⌘K: the only way back is History → Restore. With this plugin each archived workspace shows up in ⌘K as **Reopen: &lt;workspace&gt;**. Choosing it:
