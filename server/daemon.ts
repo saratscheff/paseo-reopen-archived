@@ -46,6 +46,17 @@ export function unarchiveAgent(agentId: string): Promise<void> {
   );
 }
 
+/** Switch an agent's permission mode, the request the app's mode picker sends. */
+export function setAgentMode(agentId: string, modeId: string): Promise<void> {
+  return request(
+    (requestId) => ({ type: "set_agent_mode_request", agentId, modeId, requestId }),
+    (type, reply) => {
+      if (type !== "set_agent_mode_response") return undefined;
+      return reply.accepted ? null : errorText(reply.error, "The daemon rejected the mode change");
+    },
+  );
+}
+
 /**
  * The plugin API has no restore or unarchive call, so this opens a short-lived loopback session
  * to the daemon. `settle` returns undefined for unrelated frames, null on success, or an error.

@@ -8,7 +8,8 @@ Archiving in Paseo removes a workspace from the sidebar, but it also removes it 
 
 1. restores the workspace,
 2. unarchives its agent and reloads the conversation from disk, **without sending the agent any message** (no turn starts, no tokens spent),
-3. opens that conversation.
+3. switches Claude agents to **Bypass Permissions**, so a reopened conversation does not come back in "Always Ask",
+4. opens that conversation.
 
 ## Install
 
@@ -23,7 +24,7 @@ Requires Paseo 0.10.3 or later, with the daemon running on the same machine.
 ## How it works
 
 - **Listing.** Paseo's plugin API only lists active workspaces, so the server side reads the daemon registry files under your Paseo home (`~/.paseo/projects/workspaces.json` and `~/.paseo/agents/*/*.json`). Read-only.
-- **Reopening.** The plugin API has no restore or unarchive call, so the server side opens a short-lived loopback WebSocket to the local daemon and sends the same requests the app uses: `workspace.recovery.restore.request` (History → Restore) and `refresh_agent_request` (Unarchive).
+- **Reopening.** The plugin API has no restore or unarchive call, so the server side opens a short-lived loopback WebSocket to the local daemon and sends the same requests the app uses: `workspace.recovery.restore.request` (History → Restore), `refresh_agent_request` (Unarchive) and, for Claude agents, `set_agent_mode_request` (the mode picker).
 - **Navigation.** Command center items cannot navigate, so selecting one opens a small plugin surface that runs the reopen and then jumps to the agent.
 
 The agent brought back is the most recently active archived agent in that workspace.

@@ -22,6 +22,7 @@ const AgentRecordSchema = z.object({
   archivedAt: z.string().nullish(),
   updatedAt: z.string().nullish(),
   internal: z.boolean().nullish(),
+  provider: z.string().nullish(),
 });
 type AgentRecord = z.infer<typeof AgentRecordSchema>;
 
@@ -36,13 +37,17 @@ export async function listArchivedWorkspaces(): Promise<ArchivedWorkspace[]> {
   if (archived.length === 0) return [];
   const agents = await readAgentRecords();
   return archived
-    .map((workspace) => ({
-      workspaceId: workspace.workspaceId,
-      name: workspace.title || workspace.displayName || basename(workspace.cwd),
-      cwd: workspace.cwd,
-      archivedAt: workspace.archivedAt as string,
-      agentId: mainArchivedAgent(agents, workspace.workspaceId)?.id ?? null,
-    }))
+    .map((workspace) => {
+      const agent = mainArchivedAgent(agents, workspace.workspaceId);
+      return {
+        workspaceId: workspace.workspaceId,
+        name: workspace.title || workspace.displayName || basename(workspace.cwd),
+        cwd: workspace.cwd,
+        archivedAt: workspace.archivedAt as string,
+        agentId: agent?.id ?? null,
+        agentProvider: agent?.provider ?? null,
+      };
+    })
     .sort((a, b) => b.archivedAt.localeCompare(a.archivedAt));
 }
 

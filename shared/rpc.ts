@@ -7,6 +7,7 @@ export const ArchivedWorkspaceSchema = z.object({
   cwd: z.string(),
   archivedAt: z.string(),
   agentId: z.string().nullable(),
+  agentProvider: z.string().nullable(),
 });
 export type ArchivedWorkspace = z.infer<typeof ArchivedWorkspaceSchema>;
 

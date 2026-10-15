@@ -1,7 +1,7 @@
 {
   "name": "reopen-archived",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Paseo plugin: list archived workspaces in the command center and reopen them with their agent.",
   "license": "MIT",
   "author": "Pedro Saratscheff",
